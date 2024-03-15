@@ -1,4 +1,15 @@
 AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  DeployVpc:
+    Type: String
+    Description:
+      Enter the VPC id in which will be deployed the Hello World Service
+  DeploySubnet: 
+    Type: String
+    Description: 
+      Enter the subnet id in which will be deployed the Hello World Service
+
 Resources:
   HelloWorldCluster:
     Type: AWS::ECS::Cluster
@@ -30,6 +41,7 @@ Resources:
           FromPort: 3000
           ToPort: 3000
           CidrIp: 0.0.0.0/0
+      VpcId: !Ref DeployVpc
   
 
   HelloWorldService:
@@ -44,7 +56,7 @@ Resources:
           SecurityGroups: 
             - !GetAtt HelloWorldSG.GroupId
           Subnets:
-            - subnet-0d02dcb662a120421
+            - !Ref DeploySubnet
       ServiceName: HelloWorld
       TaskDefinition: !Ref HelloWorldDefinition
 
