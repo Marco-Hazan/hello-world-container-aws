@@ -8,7 +8,7 @@ Parameters:
   DeploySubnet: 
     Type: String
     Description: 
-      Enter the subnet id in which will be deployed the Hello World Service
+      Enter the public subnet id in which will be deployed the Hello World Service
 
 Resources:
   HelloWorldCluster:
